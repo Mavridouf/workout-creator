@@ -37,3 +37,7 @@ body {
   padding: 20px 32px;
   box-sizing: content-box;
 }
+
+li {
+  list-style: none;
+}

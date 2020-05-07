@@ -3,14 +3,65 @@ import './SearchExerciseContainer.css';
 import '../../../shared/styles.css';
 import SearchBar from '../../../shared/SearchBar/SearchBar';
 import ExerciseList from './ExerciseList/ExerciseList';
+import base from '../../../shared/api'
 
 class SearchExerciseContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchTerm: '',
+      topExercises: [],
+      exerciseList: []
+    }
+  }
+
+  componentDidMount() {
+    this.getTop();
+  }
+
+  getTop = () => {
+    base('Exercises').select({
+      maxRecords: 8,
+      sort: [{ field: "Uses", direction: "desc" }],
+      view: "Grid view"
+    }).eachPage((records, fetchNextPage) => {
+      records.forEach(record => {
+        this.setState({ topExercises: [...this.state.topExercises, record] })
+      });
+      fetchNextPage();
+    }, function done(err) {
+      if (err) { console.error(err); return; }
+    });
+  }
+
+  getExercises = (name) => {
+    this.setState({ exerciseList: [] });
+    base('Exercises').select({
+      filterByFormula: `{Name} = "${name}"`,
+      view: "Grid view"
+    }).eachPage((records, fetchNextPage) => {
+      records.forEach(record => {
+        this.setState({ exerciseList: [...this.state.exerciseList, record] });
+      });
+      fetchNextPage();
+    }, function done(err) {
+      if (err) { console.error(err); return; }
+    });
+  }
+
+  onSearch = (term) => {
+    this.setState({ searchTerm: term });
+    if (term.length >= 3) {
+      this.getExercises(term);
+    }
+  }
+
   render() {
     return (
       <div className='search-exercise-container' >
         <div className="card-lg">
-          <SearchBar />
-          <ExerciseList />
+          <SearchBar onType={this.onSearch} />
+          <ExerciseList exercises={this.state.searchTerm === '' ? this.state.topExercises : this.state.exerciseList} />
         </div>
       </div >
     );

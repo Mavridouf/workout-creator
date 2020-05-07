@@ -1,10 +1,13 @@
-.exercise-item {}
+.exercise-item {
+  margin-bottom: 16px;
+}
 
 .exercise-item .wrapper {
   width: 178px;
   height: 135px;
   background: #D8D8D8;
   border-radius: 4px;
+  background-size: cover;
 }
 
 .exercise-item .wrapper span {
