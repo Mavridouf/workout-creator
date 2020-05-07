@@ -1,0 +1,6 @@
+.card-lg {
+  max-width: 420px;
+  border-radius: 21.33px;
+  box-shadow: 8px 8px 18px rgba(0, 0, 0, 0.1), -8px -8px 18px white;
+  padding: 24px;
+}
