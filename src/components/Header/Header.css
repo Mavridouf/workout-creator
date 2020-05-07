@@ -1,0 +1,35 @@
+.circle {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  box-shadow: 8px 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+.circle img {
+  width: 40px;
+  height: 40px;
+  object-fit: fill;
+}
+
+.userName {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.holy {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.test {
+  font-weight: lighter;
+  font-size: 24px;
+}
+
+.divider {
+  margin-top: 15px;
+  height: 2px;
+  background: #EBEAEA;
+  border-radius: 4px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.07), -1px -1px 3px white;
+}
