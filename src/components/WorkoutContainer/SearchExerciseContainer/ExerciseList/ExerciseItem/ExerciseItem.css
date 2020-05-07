@@ -1,0 +1,14 @@
+.exercise-item {}
+
+.exercise-item .wrapper {
+  width: 178px;
+  height: 135px;
+  background: #D8D8D8;
+  border-radius: 4px;
+}
+
+.exercise-item .wrapper span {
+  margin: 8px;
+  font-weight: bold;
+  font-size: 14px;
+}

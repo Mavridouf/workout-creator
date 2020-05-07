@@ -1,0 +1,9 @@
+.exercise-list {
+  margin-top: 24px;
+}
+
+.exercise-list .title {
+  font-size: 14px;
+  opacity: 0.3;
+  line-height: 20px;
+}
