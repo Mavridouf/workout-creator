@@ -1,6 +1,7 @@
 import React from 'react';
 import './ExerciseList.css';
 import ExerciseItem from './ExerciseItem/ExerciseItem';
+import Spinner from '../../../../shared/Spinner/Spinner';
 
 class ExerciseList extends React.Component {
 
@@ -12,7 +13,10 @@ class ExerciseList extends React.Component {
       <div className='exercise-list'>
         <p className='title'>Top Exercises</p>
         <div className='row'>
-          {exercises}
+          {this.props.loading ?
+            <div className='col-12 d-flex justify-content-center'>
+              <Spinner />
+            </div> : exercises}
         </div>
       </div>
     );

@@ -11,7 +11,8 @@ class SearchExerciseContainer extends React.Component {
     this.state = {
       searchTerm: '',
       topExercises: [],
-      exerciseList: []
+      exerciseList: [],
+      loading: false,
     }
   }
 
@@ -20,6 +21,7 @@ class SearchExerciseContainer extends React.Component {
   }
 
   getTop = () => {
+    this.setState({ loading: true });
     base('Exercises').select({
       maxRecords: 8,
       sort: [{ field: "Uses", direction: "desc" }],
@@ -29,13 +31,14 @@ class SearchExerciseContainer extends React.Component {
         this.setState({ topExercises: [...this.state.topExercises, record] })
       });
       fetchNextPage();
-    }, function done(err) {
+    }, (err) => {
+      this.setState({ loading: false });
       if (err) { console.error(err); return; }
     });
   }
 
   getExercises = (name) => {
-    this.setState({ exerciseList: [] });
+    this.setState({ exerciseList: [], loading: true });
     base('Exercises').select({
       filterByFormula: `{Name} = "${name}"`,
       view: "Grid view"
@@ -44,7 +47,8 @@ class SearchExerciseContainer extends React.Component {
         this.setState({ exerciseList: [...this.state.exerciseList, record] });
       });
       fetchNextPage();
-    }, function done(err) {
+    }, (err) => {
+      this.setState({ loading: false });
       if (err) { console.error(err); return; }
     });
   }
@@ -61,7 +65,7 @@ class SearchExerciseContainer extends React.Component {
       <div className='search-exercise-container' >
         <div className="card-lg">
           <SearchBar onType={this.onSearch} />
-          <ExerciseList exercises={this.state.searchTerm === '' ? this.state.topExercises : this.state.exerciseList} />
+          <ExerciseList loading={this.state.loading} exercises={this.state.searchTerm.length < 3 ? this.state.topExercises : this.state.exerciseList} />
         </div>
       </div >
     );

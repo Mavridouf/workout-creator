@@ -15,3 +15,15 @@
   font-weight: bold;
   font-size: 14px;
 }
+
+.wrapper:hover {
+  cursor: pointer;
+}
+
+.wrapper:hover .add-exercise-btn {
+  display: block;
+}
+
+.add-exercise-btn {
+  display: none;
+}
