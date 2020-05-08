@@ -11,3 +11,43 @@
 .workout-container .title2 {
   font-size: 24px;
 }
+
+.workout-container .workoutTotalLabel {
+  font-size: 14px;
+  opacity: 0.4;
+}
+
+.workout-container .workoutTotalValue {
+  font-weight: bold;
+  font-size: 16px;
+  opacity: 0.4;
+}
+
+.workout-container .workout-row {
+  margin-top: 34px;
+  height: 56px;
+}
+
+.workout-container .save-workout-btn {
+  margin-left: 16px;
+  font-weight: bold;
+  border: 3px solid #1979FF;
+  border-radius: 8px;
+  color: #1979FF;
+  width: 94px;
+  height: 40px;
+  box-shadow: 8px 8px 18px rgba(0, 0, 0, 0.1), -8px -8px 18px white;
+  -webkit-transition: color 0.1s ease-out, background-color 0.1s ease-in-out;
+  -moz-transition: color 0.1s ease-out, background-color 0.1s ease-in-out;
+  -o-transition: color 0.1s ease-out, background-color 0.1s ease-in-out;
+  transition: color 0.1s ease-out, background-color 0.1s ease-in-out;
+}
+
+.workout-container .save-workout-btn:hover {
+  color: #EBEAEA;
+  background-color: #1979FF;
+}
+
+.workout-container .save-workout-btn:focus {
+  outline: 0px solid !important;
+}

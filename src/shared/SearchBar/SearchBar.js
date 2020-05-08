@@ -2,21 +2,22 @@ import React from 'react';
 import './SearchBar.css';
 
 class SearchBar extends React.Component {
-  state = { searchValue: '' }
+  state = { inputVal: '' }
 
   onInputType = event => {
     let term = event.target.value;
-    this.setState({ searchValue: term });
+    this.setState({ inputVal: term });
     this.props.onType(term);
   }
 
   render() {
+    const style = this.props.width ? { width: this.props.width + 'px' } : null;
     return (
-      <div className='SearchBar'>
+      <div className='SearchBar' style={style}>
         <div className="form-group">
           <input type="text" className="form-control"
             placeholder={`${this.props.text}`}
-            value={this.state.searchValue}
+            value={this.state.inputVal}
             onChange={this.onInputType}
           />
         </div>
