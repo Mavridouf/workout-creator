@@ -1,13 +1,13 @@
 .workout-container {
-  max-width: 864px;
+  max-width: 884px;
   margin: 37px auto 0;
 }
 
-.workout-container>.title1 {
+.workout-container .title1 {
   font-weight: bold;
   font-size: 24px;
 }
 
-.workout-container>.title2 {
+.workout-container .title2 {
   font-size: 24px;
 }

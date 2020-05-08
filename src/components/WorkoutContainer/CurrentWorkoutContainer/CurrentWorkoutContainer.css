@@ -1,0 +1,9 @@
+.current-workout-container {
+  margin-top: 24px;
+}
+
+.current-workout-container .card-lg {
+  max-width: 440px;
+  min-width: 440px;
+  padding: 16px;
+}

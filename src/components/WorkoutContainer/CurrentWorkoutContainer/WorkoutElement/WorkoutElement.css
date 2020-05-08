@@ -1,0 +1,16 @@
+.workout-element {
+  margin-top: 16px;
+}
+
+.workout-element .card-name {
+  margin-left: 12px;
+}
+
+.workout-element .break-duration {
+  margin-left: 0.25rem;
+  margin-top: 0.1rem;
+}
+
+.workout-element .attributes-row {
+  margin-top: 18px;
+}

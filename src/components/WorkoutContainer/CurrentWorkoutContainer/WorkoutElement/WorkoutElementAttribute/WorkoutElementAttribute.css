@@ -1,0 +1,19 @@
+.workout-element-attribute {}
+
+.workout-element-attribute>.wrapper {
+  width: 84px;
+  height: 64px;
+  border-radius: 10px;
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.12), inset -2px -2px 4px rgba(255, 255, 255, 0.5)
+}
+
+.workout-element-attribute .element-title {
+  font-size: 12px;
+  opacity: 0.4;
+}
+
+.workout-element-attribute .element-value {
+  font-weight: bold;
+  font-size: 20px;
+  opacity: 0.8;
+}
