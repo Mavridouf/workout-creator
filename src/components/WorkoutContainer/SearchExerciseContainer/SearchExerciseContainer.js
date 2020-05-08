@@ -6,6 +6,10 @@ import ExerciseList from './ExerciseList/ExerciseList';
 import base from '../../../shared/api'
 
 class SearchExerciseContainer extends React.Component {
+  exerciseAdd = (exercise) => {
+    this.props.exerciseToAdd(exercise)
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -65,7 +69,7 @@ class SearchExerciseContainer extends React.Component {
       <div className='search-exercise-container' >
         <div className="card-lg">
           <SearchBar onType={this.onSearch} />
-          <ExerciseList loading={this.state.loading} exercises={this.state.searchTerm.length < 3 ? this.state.topExercises : this.state.exerciseList} />
+          <ExerciseList exerciseToAdd={this.exerciseAdd} loading={this.state.loading} exercises={this.state.searchTerm.length < 3 ? this.state.topExercises : this.state.exerciseList} />
         </div>
       </div >
     );
