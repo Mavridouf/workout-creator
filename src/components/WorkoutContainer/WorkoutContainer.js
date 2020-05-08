@@ -17,8 +17,10 @@ class WorkoutContainer extends React.Component {
     this.setState({ workout: [...this.state.workout, workoutExercise] });
   }
 
-  removeExercise(index) {
-
+  removeExercise = (index) => {
+    let workout = this.state.workout;
+    workout.splice(index, 1);
+    this.setState({ workout: workout });
   }
 
   render() {
@@ -32,7 +34,7 @@ class WorkoutContainer extends React.Component {
         <div className='col-md-6'> <SearchExerciseContainer exerciseToAdd={this.addExercise} />
         </div>
         <div className='col-md-6'>
-          <CurrentWorkoutContainer workout={this.state.workout} />
+          <CurrentWorkoutContainer removeElement={this.removeExercise} workout={this.state.workout} />
         </div>
       </div >
     );
