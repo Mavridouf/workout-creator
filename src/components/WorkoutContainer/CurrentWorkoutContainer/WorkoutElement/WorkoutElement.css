@@ -2,6 +2,17 @@
   margin-top: 16px;
 }
 
+.workout-element>.card-sm {
+  max-width: 408px;
+  min-width: 408px;
+  padding: 17px 24px;
+}
+
+.workout-element>.card-sm:hover {
+  cursor: pointer;
+  box-shadow: 16px 16px 30px rgba(0, 0, 0, 0.1), -16px -16px 30px white;
+}
+
 .workout-element .card-name {
   margin-left: 12px;
 }

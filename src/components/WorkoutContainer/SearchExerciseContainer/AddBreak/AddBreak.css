@@ -1,0 +1,6 @@
+.add-break {}
+
+.add-break>.circle {
+  height: 32px;
+  width: 32px;
+}

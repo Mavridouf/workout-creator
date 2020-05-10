@@ -4,6 +4,7 @@ import '../../../shared/styles.css';
 import SearchBar from '../../../shared/SearchBar/SearchBar';
 import ExerciseList from './ExerciseList/ExerciseList';
 import base from '../../../shared/api'
+import AddBreak from './AddBreak/AddBreak';
 
 class SearchExerciseContainer extends React.Component {
   exerciseAdd = (exercise) => {
@@ -69,6 +70,7 @@ class SearchExerciseContainer extends React.Component {
       <div className='search-exercise-container' >
         <div className="card-lg">
           <SearchBar onType={this.onSearch} />
+          <AddBreak />
           <ExerciseList exerciseToAdd={this.exerciseAdd} loading={this.state.loading} exercises={this.state.searchTerm.length < 3 ? this.state.topExercises : this.state.exerciseList} />
         </div>
       </div >
