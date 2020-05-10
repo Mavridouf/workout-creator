@@ -25,3 +25,20 @@
 .workout-element .attributes-row {
   margin-top: 18px;
 }
+
+.workout-element .add-break-element {
+  margin-top: 24px;
+  cursor: pointer;
+}
+
+.workout-element .add-break-element .line {
+  width: 144px;
+  border: 2px solid #D8D8D8;
+  border-radius: 4px;
+}
+
+.workout-element .add-break-element .break-line {
+  font-weight: bold;
+  font-size: 14px;
+  opacity: 0.4;
+}

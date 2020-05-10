@@ -1,6 +1,15 @@
 .add-break {}
 
+.add-break:hover:not(.disabled) {
+  cursor: pointer;
+  box-shadow: 16px 16px 30px rgba(0, 0, 0, 0.1), -16px -16px 30px white;
+}
+
 .add-break>.circle {
   height: 32px;
   width: 32px;
+}
+
+.add-break span {
+  font-weight: bold;
 }

@@ -42,6 +42,13 @@ class WorkoutContainer extends React.Component {
     });
   }
 
+  addBreakAtPosition = (index) => {
+    const breakElement = { Name: 'Break', Duration: '5m' };
+    let workout = this.state.workout;
+    workout.splice(index, 0, breakElement);
+    this.setState({ workout: workout, totalDuration: this.state.totalDuration + 5 });
+  }
+
   render() {
     return (
       <div className='workout-container row no-gutters' >
@@ -61,10 +68,10 @@ class WorkoutContainer extends React.Component {
           </div>
         </div>
         <div className='col-md-6'>
-          <SearchExerciseContainer exerciseToAdd={this.addExercise} />
+          <SearchExerciseContainer addBreak={this.addBreakAtPosition} workout={this.state.workout} exerciseToAdd={this.addExercise} />
         </div>
         <div className='col-md-6'>
-          <CurrentWorkoutContainer removeElement={this.removeExercise} workout={this.state.workout} />
+          <CurrentWorkoutContainer addBreak={this.addBreakAtPosition} removeElement={this.removeExercise} workout={this.state.workout} />
         </div>
       </div >
     );

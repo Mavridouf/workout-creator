@@ -65,12 +65,16 @@ class SearchExerciseContainer extends React.Component {
     }
   }
 
+  breakClicked = (index) => {
+    this.props.addBreak(index);
+  }
+
   render() {
     return (
       <div className='search-exercise-container' >
         <div className="card-lg">
           <SearchBar onType={this.onSearch} />
-          <AddBreak />
+          <AddBreak addBreak={this.breakClicked} workout={this.props.workout} />
           <ExerciseList exerciseToAdd={this.exerciseAdd} loading={this.state.loading} exercises={this.state.searchTerm.length < 3 ? this.state.topExercises : this.state.exerciseList} />
         </div>
       </div >

@@ -8,7 +8,13 @@ class WorkoutElement extends React.Component {
     this.props.removeElement(this.props.index);
   }
 
+  addBreak = () => {
+    this.props.toAddBreak(this.props.index + 1);
+  }
+
   render() {
+    const index = this.props.index;
+
     let attributes = [];
     for (const key in this.props.exercise) {
       if (key !== 'Id' && key !== 'Name')
@@ -55,7 +61,14 @@ class WorkoutElement extends React.Component {
               {workoutElementAttributes}
             </div> : null}
         </div>
-      </div >
+        {this.props.workout[index].Name !== 'Break' && index + 1 < this.props.workout.length && this.props.workout[index + 1].Name !== 'Break' ?
+          <div onClick={this.addBreak} className='add-break-element d-flex justify-content-between align-items-center row no-gutters'>
+            <div className='line'></div>
+            <span className='break-line'>Add Break</span>
+            <div className='line'></div>
+          </div> : <div></div>
+        }
+      </div>
     );
   }
 }
