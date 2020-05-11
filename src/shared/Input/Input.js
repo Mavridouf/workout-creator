@@ -10,15 +10,30 @@ class Input extends React.Component {
     this.props.onType(term);
   }
 
+  inputFocused = event => {
+    event.target.parentNode.classList.add('active');
+  }
+
+  inputBlured = event => {
+    if (!event.target.value) event.target.parentNode.classList.remove('active');
+  }
+
+
   render() {
     const style = this.props.width ? { width: this.props.width + 'px' } : null;
     return (
       <div className='Input' style={style}>
-        <div className="form-group">
-          <input type="text" className="form-control"
-            placeholder={`${this.props.text}`}
+        <div className="form-group float-container">
+          <label htmlFor='input'>{this.props.label}</label>
+          <input onBlur={this.inputBlured}
+            onFocus={this.inputFocused}
+            id="input"
+            type="text"
+            className={"form-control " + (this.props.inputType)}
+            placeholder={this.props.text}
             value={this.state.inputVal}
             onChange={this.onInputType}
+            maxLength={this.props.maxLength}
           />
         </div>
       </div>
@@ -27,7 +42,8 @@ class Input extends React.Component {
 }
 
 Input.defaultProps = {
-  text: 'Search:'
+  text: null,
+  label: null
 }
 
 export default Input;

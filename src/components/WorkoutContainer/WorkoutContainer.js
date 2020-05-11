@@ -99,7 +99,7 @@ class WorkoutContainer extends React.Component {
         <div className='col-md-6'></div>
         <div className='col-md-12'>
           <div className='workout-row row no-gutters'>
-            <div className='col-md-6 align-items-center'><Input onType={this.updateWorkoutName} text='Input Text' width='420' /></div>
+            <div className='col-md-6 align-items-center'><Input inputType={'workout-name'} onType={this.updateWorkoutName} maxLength={12} label='Workout name' width='420' /></div>
             <div className='col-md-6 d-flex justify-content-end align-items-center'>
               <span className='workoutTotalLabel'>Total Time &nbsp;</span>
               <span className='workoutTotalValue'>{' ' + this.state.totalDuration + ' ' + 'm'}</span>

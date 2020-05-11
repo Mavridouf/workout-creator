@@ -6,6 +6,10 @@
   max-width: 408px;
   min-width: 408px;
   padding: 17px 24px;
+  -webkit-transition: box-shadow 0.150s ease-out;
+  -moz-transition: box-shadow 0.150s ease-out;
+  -o-transition: box-shadow 0.150s ease-out;
+  transition: box-shadow 0.150s ease-out;
 }
 
 .workout-element>.card-sm:hover {
@@ -41,4 +45,12 @@
   font-weight: bold;
   font-size: 14px;
   opacity: 0.4;
+  -webkit-transition: opacity 0.150s ease-out;
+  -moz-transition: opacity 0.150s ease-out;
+  -o-transition: opacity 0.150s ease-out;
+  transition: opacity 0.150s ease-out;
+}
+
+.workout-element .add-break-element:hover .break-line {
+  opacity: 0.8;
 }

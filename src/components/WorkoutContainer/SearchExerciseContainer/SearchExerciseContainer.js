@@ -73,7 +73,7 @@ class SearchExerciseContainer extends React.Component {
     return (
       <div className='search-exercise-container' >
         <div className="card-lg">
-          <Input onType={this.onSearch} />
+          <Input onType={this.onSearch} text='Search:' />
           <AddBreak addBreak={this.breakClicked} workout={this.props.workout} />
           <ExerciseList exerciseToAdd={this.exerciseAdd} loading={this.state.loading} workout={this.props.workout} exercises={this.state.searchTerm.length < 3 ? this.state.topExercises : this.state.exerciseList} />
         </div>

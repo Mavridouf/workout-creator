@@ -1,4 +1,9 @@
-.add-break {}
+.add-break {
+  -webkit-transition: box-shadow 0.150s ease-out;
+  -moz-transition: box-shadow 0.150s ease-out;
+  -o-transition: box-shadow 0.150s ease-out;
+  transition: box-shadow 0.150s ease-out;
+}
 
 .add-break:hover:not(.disabled) {
   cursor: pointer;
