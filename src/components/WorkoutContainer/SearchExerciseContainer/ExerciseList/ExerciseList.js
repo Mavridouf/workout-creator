@@ -10,7 +10,7 @@ class ExerciseList extends React.Component {
 
   render() {
     const exercises = this.props.exercises.map((exercise) =>
-      <ExerciseItem exerciseToAdd={this.exerciseAdd} key={exercise.id} exercise={exercise} name={exercise.fields.Name} imageUrl={exercise.fields.Photo[0].url} />)
+      <ExerciseItem exerciseToAdd={this.exerciseAdd} key={exercise.id} exercise={exercise} name={exercise.fields.Name} imageUrl={exercise.fields.Photo && exercise.fields.Photo[0].url} />)
 
     return (
       <div className='exercise-list'>

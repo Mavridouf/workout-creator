@@ -25,7 +25,8 @@ class WorkoutContainer extends React.Component {
   }
 
   addExercise = (exercise) => {
-    let workoutExercise = pick(exercise.fields, ['Name', 'Weight', 'Sets', 'Repetition', 'Speed', 'Duration', 'Rest Between']);
+    let workoutExercise = pick(exercise.fields, ['Name', 'Weight', 'Sets', 'Repetition', 'Speed', 'Duration', 'Rest Between', 'Rest Between (seconds)']);
+    workoutExercise['Rest Between (seconds)'] += "”";
     this.setState({
       workout: [...this.state.workout, workoutExercise],
       totalDuration: this.state.totalDuration + this.getExerciseDuration(workoutExercise)

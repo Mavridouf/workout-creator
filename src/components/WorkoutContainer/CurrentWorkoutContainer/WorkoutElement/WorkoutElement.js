@@ -23,7 +23,7 @@ class WorkoutElement extends React.Component {
           value: this.props.exercise[key]
         })
     }
-    const workoutElementAttributes = attributes.map((attribute) => <WorkoutElementAttribute key={attribute.title} title={attribute.title} value={attribute.value} />
+    const workoutElementAttributes = attributes.map((attribute) => attribute.title !== 'Rest Between' ? <WorkoutElementAttribute key={attribute.title} title={attribute.title} value={attribute.value} /> : null
     )
 
     return (
@@ -68,7 +68,7 @@ class WorkoutElement extends React.Component {
             <div className='line'></div>
           </div> : <div></div>
         }
-      </div>
+      </div >
     );
   }
 }

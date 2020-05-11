@@ -6,7 +6,7 @@ class WorkoutElementAttribute extends React.Component {
     switch (key) {
       case 'Repetition': return 'Reps';
       case 'Duration': return 'Time';
-      case 'Rest Between': return 'Rest';
+      case 'Rest Between (seconds)': return 'Rest';
       default: return key;
     }
   }
