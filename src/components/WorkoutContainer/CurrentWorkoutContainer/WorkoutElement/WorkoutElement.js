@@ -1,6 +1,7 @@
 import React from 'react';
 import './WorkoutElement.css';
 import WorkoutElementAttribute from './WorkoutElementAttribute/WorkoutElementAttribute';
+import { maxWorkoutLength } from '../../../../shared/helper';
 
 class WorkoutElement extends React.Component {
 
@@ -23,7 +24,7 @@ class WorkoutElement extends React.Component {
           value: this.props.exercise[key]
         })
     }
-    const workoutElementAttributes = attributes.map((attribute) => attribute.title !== 'Rest Between' ? <WorkoutElementAttribute key={attribute.title} title={attribute.title} value={attribute.value} /> : null
+    const workoutElementAttributes = attributes.map((attribute) => attribute.title !== 'Rest Between' && attribute.title !== 'id' ? <WorkoutElementAttribute key={attribute.title} title={attribute.title} value={attribute.value} /> : null
     )
 
     return (
@@ -61,7 +62,7 @@ class WorkoutElement extends React.Component {
               {workoutElementAttributes}
             </div> : null}
         </div>
-        {this.props.workout[index].Name !== 'Break' && index + 1 < this.props.workout.length && this.props.workout[index + 1].Name !== 'Break' ?
+        {!maxWorkoutLength(this.props.workout) && this.props.workout[index].Name !== 'Break' && index + 1 < this.props.workout.length && this.props.workout[index + 1].Name !== 'Break' ?
           <div onClick={this.addBreak} className='add-break-element d-flex justify-content-between align-items-center row no-gutters'>
             <div className='line'></div>
             <span className='break-line'>Add Break</span>

@@ -1,6 +1,6 @@
-.SearchBar {}
+.Input {}
 
-.SearchBar input {
+.Input input {
   min-height: 56px;
   background: #F3F3F3;
   border-radius: 8px;

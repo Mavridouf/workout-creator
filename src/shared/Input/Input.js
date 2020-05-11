@@ -1,7 +1,7 @@
 import React from 'react';
-import './SearchBar.css';
+import './Input.css';
 
-class SearchBar extends React.Component {
+class Input extends React.Component {
   state = { inputVal: '' }
 
   onInputType = event => {
@@ -13,7 +13,7 @@ class SearchBar extends React.Component {
   render() {
     const style = this.props.width ? { width: this.props.width + 'px' } : null;
     return (
-      <div className='SearchBar' style={style}>
+      <div className='Input' style={style}>
         <div className="form-group">
           <input type="text" className="form-control"
             placeholder={`${this.props.text}`}
@@ -26,8 +26,8 @@ class SearchBar extends React.Component {
   }
 }
 
-SearchBar.defaultProps = {
+Input.defaultProps = {
   text: 'Search:'
 }
 
-export default SearchBar;
+export default Input;

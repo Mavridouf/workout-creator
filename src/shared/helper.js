@@ -19,3 +19,7 @@ export const getBreakIndex = (workout) => {
 
   return 0;
 }
+
+export const maxWorkoutLength = (workout) => {
+  return workout && workout.length === 12;
+}

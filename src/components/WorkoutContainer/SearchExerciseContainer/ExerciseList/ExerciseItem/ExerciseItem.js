@@ -1,11 +1,13 @@
 import React from 'react';
 import './ExerciseItem.css';
 import SvgButton from '../../../../../shared/Buttons/SvgButton';
+import { maxWorkoutLength } from '../../../../../shared/helper';
 
 class ExerciseItem extends React.Component {
 
   exerciseClicked = () => {
-    this.props.exerciseToAdd(this.props.exercise);
+    if (!maxWorkoutLength(this.props.workout))
+      this.props.exerciseToAdd(this.props.exercise);
   }
 
   render() {
@@ -18,11 +20,12 @@ class ExerciseItem extends React.Component {
 
     return (
       <div className='exercise-item col-6'>
-        <div className='wrapper d-flex' style={imgStyle} onClick={this.exerciseClicked}>
+        <div className={'wrapper d-flex ' + (maxWorkoutLength(this.props.workout) ? 'disabled' : '')} style={imgStyle} onClick={this.exerciseClicked}>
           <span className='align-self-end'>{this.props.name} </span>
-          <div className='ml-auto add-exercise-btn' style={btnStyle}>
-            <SvgButton />
-          </div>
+          {!maxWorkoutLength(this.props.workout) ?
+            <div className='ml-auto add-exercise-btn' style={btnStyle}>
+              <SvgButton />
+            </div> : null}
         </div>
       </div>
     );

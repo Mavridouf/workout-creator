@@ -1,7 +1,7 @@
 import React from 'react';
 import './SearchExerciseContainer.css';
 import '../../../shared/styles.css';
-import SearchBar from '../../../shared/SearchBar/SearchBar';
+import Input from '../../../shared/Input/Input';
 import ExerciseList from './ExerciseList/ExerciseList';
 import base from '../../../shared/api'
 import AddBreak from './AddBreak/AddBreak';
@@ -73,9 +73,9 @@ class SearchExerciseContainer extends React.Component {
     return (
       <div className='search-exercise-container' >
         <div className="card-lg">
-          <SearchBar onType={this.onSearch} />
+          <Input onType={this.onSearch} />
           <AddBreak addBreak={this.breakClicked} workout={this.props.workout} />
-          <ExerciseList exerciseToAdd={this.exerciseAdd} loading={this.state.loading} exercises={this.state.searchTerm.length < 3 ? this.state.topExercises : this.state.exerciseList} />
+          <ExerciseList exerciseToAdd={this.exerciseAdd} loading={this.state.loading} workout={this.props.workout} exercises={this.state.searchTerm.length < 3 ? this.state.topExercises : this.state.exerciseList} />
         </div>
       </div >
     );

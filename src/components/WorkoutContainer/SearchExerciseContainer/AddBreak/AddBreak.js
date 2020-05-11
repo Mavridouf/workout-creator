@@ -1,17 +1,17 @@
 import React from 'react';
 import './AddBreak.css';
-import { getBreakIndex } from '../../../../shared/helper';
+import { getBreakIndex, maxWorkoutLength } from '../../../../shared/helper';
 
 class AddBreak extends React.Component {
 
   breakClicked = () => {
     const index = getBreakIndex(this.props.workout);
-    if (index) this.props.addBreak(index);
+    if (index && !maxWorkoutLength(this.props.workout)) this.props.addBreak(index);
   }
 
   render() {
     return (
-      <div onClick={this.breakClicked} className={'add-break card-sm d-flex justify-content-between align-items-center ' + (getBreakIndex(this.props.workout) === 0 ? 'disabled' : '')}>
+      <div onClick={this.breakClicked} className={'add-break card-sm d-flex justify-content-between align-items-center ' + (getBreakIndex(this.props.workout) === 0 || maxWorkoutLength(this.props.workout) ? 'disabled' : '')}>
         <svg width="16px" height="20px" viewBox="0 0 16 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
           <title>Break</title>
           <g id="Design" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd" opacity="0.2">
