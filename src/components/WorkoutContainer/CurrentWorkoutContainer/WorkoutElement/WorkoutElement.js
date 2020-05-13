@@ -24,7 +24,7 @@ class WorkoutElement extends React.Component {
           value: this.props.exercise[key]
         })
     }
-    const workoutElementAttributes = attributes.map((attribute) => attribute.title !== 'Rest Between' && attribute.title !== 'id' ? <WorkoutElementAttribute key={attribute.title} title={attribute.title} value={attribute.value} /> : null
+    const workoutElementAttributes = attributes.map((attribute) => attribute.title !== 'Rest Between' && attribute.title !== 'id' && attribute.title !== 'dragId' ? <WorkoutElementAttribute key={attribute.title} title={attribute.title} value={attribute.value} /> : null
     )
 
     return (

@@ -3,19 +3,29 @@ import SearchExerciseContainer from './SearchExerciseContainer/SearchExerciseCon
 import CurrentWorkoutContainer from './CurrentWorkoutContainer/CurrentWorkoutContainer';
 import Input from '../../shared/Input/Input';
 import { pick } from '../../shared/helper';
-import './WorkoutContainer.css';
 import Spinner from '../../shared/Spinner/Spinner';
 import base from '../../shared/api';
+import { v4 as uuid } from 'uuid';
+import './WorkoutContainer.css';
+
 
 class WorkoutContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      workout: [],
+      workout: {
+        [uuid()]: {
+          exercises: []
+        }
+      },
       totalDuration: 0,
       workoutName: '',
-      loading: false
+      loading: false,
     }
+  }
+
+  getStateExercises = () => {
+    return this.state.workout[Object.keys(this.state.workout)[0]].exercises;
   }
 
   saveWorkout = () => {
@@ -37,15 +47,15 @@ class WorkoutContainer extends React.Component {
       Exercises: []
     }
     workoutRequest['Link to Exercises'] = this.getExercisesIds();
-    this.state.workout.forEach((exercise, index) => {
+    this.getStateExercises().forEach((exercise, index) => {
       workoutRequest['Exercises'].push(index + 1 + ' - ' + exercise.Name.trim());
     });
     return workoutRequest;
   }
 
   getExercisesIds = () => {
-    let ids = this.state.workout.map(exercise => exercise.id);
-    return [... new Set(ids)];
+    let ids = this.getStateExercises().map(exercise => exercise.id);
+    return [...new Set(ids)];
   }
 
   getExerciseDuration = (workoutExercise) => {
@@ -61,32 +71,75 @@ class WorkoutContainer extends React.Component {
   addExercise = (exercise) => {
     let workoutExercise = pick(exercise.fields, ['Name', 'Weight', 'Sets', 'Repetition', 'Speed', 'Duration', 'Rest Between', 'Rest Between (seconds)']);
     workoutExercise['id'] = exercise.id;
-    if (workoutExercise.hasOwnProperty("Rest Between (seconds)")) workoutExercise['Rest Between (seconds)'] += "”";
-    this.setState({
-      workout: [...this.state.workout, workoutExercise],
-      totalDuration: this.state.totalDuration + this.getExerciseDuration(workoutExercise)
+    workoutExercise['dragId'] = uuid();
+    this.setState(prevState => {
+      return ({
+        workout: {
+          [Object.keys(prevState.workout)[0]]: {
+            exercises: [...prevState.workout[Object.keys(prevState.workout)[0]].exercises, workoutExercise]
+          }
+        },
+        totalDuration: this.state.totalDuration + this.getExerciseDuration(workoutExercise)
+      })
     });
   }
 
   removeExercise = (index) => {
-    let workout = this.state.workout;
-    let exerciseDuration = this.getExerciseDuration(workout[index]);
-    workout.splice(index, 1);
-    this.setState({
-      workout: workout,
-      totalDuration: this.state.totalDuration - exerciseDuration
-    });
+    let exercises = this.getStateExercises();
+    let exerciseDuration = this.getExerciseDuration(exercises[index]);
+    exercises.splice(index, 1);
+    this.setState(prevState => {
+      return ({
+        workout: {
+          [Object.keys(prevState.workout)[0]]: {
+            exercises: exercises
+          }
+        },
+        totalDuration: this.state.totalDuration - exerciseDuration
+      });
+    })
   }
 
   addBreakAtPosition = (index) => {
-    const breakElement = { Name: 'Break', Duration: '5m', id: 'recE8aHgqqWguo8jV' };
-    let workout = this.state.workout;
-    workout.splice(index, 0, breakElement);
-    this.setState({ workout: workout, totalDuration: this.state.totalDuration + 5 });
+    const breakElement = { Name: 'Break', Duration: '5m', id: 'recE8aHgqqWguo8jV', dragId: uuid() };
+    let exercises = this.getStateExercises();
+    exercises.splice(index, 0, breakElement);
+    this.setState(prevState => {
+      return ({
+        workout: {
+          [Object.keys(prevState.workout)[0]]: {
+            exercises: exercises
+          }
+        },
+        totalDuration: this.state.totalDuration + 5
+      });
+    });
   }
 
   updateWorkoutName = (name) => {
     this.setState({ workoutName: name });
+  }
+
+  orderItemsOnDrag = (result) => {
+    const { source, destination } = result;
+    const column = this.state.workout[Object.keys(this.state.workout)[0]];
+    const copiedItems = [...column.exercises];
+    const [removed] = copiedItems.splice(source.index, 1);
+    let totalDuration = this.state.totalDuration;
+    if (result.destination) {
+      copiedItems.splice(destination.index, 0, removed);
+    }
+    else totalDuration -= this.getExerciseDuration(removed);
+    this.setState(prevState => {
+      return ({
+        workout: {
+          [Object.keys(prevState.workout)[0]]: {
+            exercises: copiedItems
+          }
+        },
+        totalDuration: totalDuration
+      });
+    });
   }
 
   render() {
@@ -101,19 +154,19 @@ class WorkoutContainer extends React.Component {
           <div className='workout-row row no-gutters'>
             <div className='col-md-6 align-items-center'><Input inputType={'workout-name'} onType={this.updateWorkoutName} maxLength={12} label='Workout name' width='420' /></div>
             <div className='col-md-6 d-flex justify-content-end align-items-center'>
-              <span className='workoutTotalLabel'>Total Time &nbsp;</span>
-              <span className='workoutTotalValue'>{' ' + this.state.totalDuration + ' ' + 'm'}</span>
+              <span className='workoutTotalLabel'>Total Time&nbsp;</span>
+              <span className='workoutTotalValue'>{this.state.totalDuration + ' m'}</span>
               {this.state.loading ? <Spinner /> :
-                <button type="button" onClick={this.saveWorkout} className="save-workout-btn" disabled={this.state.workout.length === 0 || this.state.workoutName.length === 0} >Save</button>
+                <button type="button" onClick={this.saveWorkout} className="save-workout-btn" disabled={(this.getStateExercises && this.getStateExercises().length === 0) || this.state.workoutName.length === 0} >Save</button>
               }
             </div>
           </div>
         </div>
         <div className='col-md-6'>
-          <SearchExerciseContainer addBreak={this.addBreakAtPosition} workout={this.state.workout} exerciseToAdd={this.addExercise} />
+          <SearchExerciseContainer addBreak={this.addBreakAtPosition} workout={this.getStateExercises()} exerciseToAdd={this.addExercise} />
         </div>
         <div className='col-md-6'>
-          <CurrentWorkoutContainer addBreak={this.addBreakAtPosition} removeElement={this.removeExercise} workout={this.state.workout} />
+          <CurrentWorkoutContainer setOrder={this.orderItemsOnDrag} addBreak={this.addBreakAtPosition} removeElement={this.removeExercise} workout={this.state.workout} exercises={this.getStateExercises()} />
         </div>
       </div >
     );

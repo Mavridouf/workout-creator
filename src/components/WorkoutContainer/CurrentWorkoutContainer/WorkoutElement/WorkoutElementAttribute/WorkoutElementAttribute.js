@@ -4,16 +4,14 @@ import './WorkoutElementAttribute.css';
 class WorkoutElementAttribute extends React.Component {
   mapKeytoTitle = (key) => {
     switch (key) {
-      case 'Repetition': return 'Reps';
-      case 'Duration': return 'Time';
-      case 'Rest Between (seconds)': return 'Rest';
-      default: return key;
+      case 'Repetition': return 'REPS';
+      case 'Duration': return 'TIME';
+      case 'Rest Between (seconds)': return 'REST';
+      default: return key.toUpperCase();
     }
   }
 
   render() {
-    let title = this.props.title;
-    title = title.toUpperCase();
     return (
       <div className='col workout-element-attribute d-flex flex-column justify-content-center align-items-center '>
         <div className='wrapper d-flex flex-column justify-content-center align-items-center'>
