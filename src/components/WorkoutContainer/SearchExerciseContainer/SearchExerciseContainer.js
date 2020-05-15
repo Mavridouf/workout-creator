@@ -5,6 +5,7 @@ import Input from '../../../shared/Input/Input';
 import ExerciseList from './ExerciseList/ExerciseList';
 import base from '../../../shared/api'
 import AddBreak from './AddBreak/AddBreak';
+import _ from 'lodash';
 
 class SearchExerciseContainer extends React.Component {
   exerciseAdd = (exercise) => {
@@ -19,6 +20,7 @@ class SearchExerciseContainer extends React.Component {
       exerciseList: [],
       loading: false,
     }
+    this.getExercises = _.debounce(this.getExercises, 500);
   }
 
   componentDidMount() {

@@ -55,7 +55,7 @@ class WorkoutContainer extends React.Component {
 
   getExercisesIds = () => {
     let ids = this.getStateExercises().map(exercise => exercise.id);
-    return [... new Set(ids)];
+    return [...new Set(ids)];
   }
 
   getExerciseDuration = (workoutExercise) => {
@@ -154,7 +154,7 @@ class WorkoutContainer extends React.Component {
             <div className='col-md-6 align-items-center'><Input inputType={'workout-name'} onType={this.updateWorkoutName} maxLength={12} label='Workout name' width='420' /></div>
             <div className='col-md-6 d-flex justify-content-end align-items-center'>
               <span className='workoutTotalLabel'>Total Time &nbsp;</span>
-              <span className='workoutTotalValue'>{' ' + this.state.totalDuration + ' ' + 'm'}</span>
+              <span className='workoutTotalValue'>{this.state.totalDuration + ' m'}</span>
               {this.state.loading ? <Spinner /> :
                 <button type="button" onClick={this.saveWorkout} className="save-workout-btn" disabled={(this.getStateExercises && this.getStateExercises().length === 0) || this.state.workoutName.length === 0} >Save</button>
               }
