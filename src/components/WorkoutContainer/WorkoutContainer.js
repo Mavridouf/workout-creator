@@ -55,7 +55,7 @@ class WorkoutContainer extends React.Component {
 
   getExercisesIds = () => {
     let ids = this.getStateExercises().map(exercise => exercise.id);
-    return [...new Set(ids)];
+    return [... new Set(ids)];
   }
 
   getExerciseDuration = (workoutExercise) => {
@@ -125,11 +125,10 @@ class WorkoutContainer extends React.Component {
     const column = this.state.workout[Object.keys(this.state.workout)[0]];
     const copiedItems = [...column.exercises];
     const [removed] = copiedItems.splice(source.index, 1);
-    let totalDuration = this.state.totalDuration;
     if (result.destination) {
       copiedItems.splice(destination.index, 0, removed);
+
     }
-    else totalDuration -= this.getExerciseDuration(removed);
     this.setState(prevState => {
       return ({
         workout: {
@@ -137,7 +136,7 @@ class WorkoutContainer extends React.Component {
             exercises: copiedItems
           }
         },
-        totalDuration: totalDuration
+        totalDuration: this.state.totalDuration - this.getExerciseDuration([removed.index])
       });
     });
   }
@@ -154,8 +153,8 @@ class WorkoutContainer extends React.Component {
           <div className='workout-row row no-gutters'>
             <div className='col-md-6 align-items-center'><Input inputType={'workout-name'} onType={this.updateWorkoutName} maxLength={12} label='Workout name' width='420' /></div>
             <div className='col-md-6 d-flex justify-content-end align-items-center'>
-              <span className='workoutTotalLabel'>Total Time&nbsp;</span>
-              <span className='workoutTotalValue'>{this.state.totalDuration + ' m'}</span>
+              <span className='workoutTotalLabel'>Total Time &nbsp;</span>
+              <span className='workoutTotalValue'>{' ' + this.state.totalDuration + ' ' + 'm'}</span>
               {this.state.loading ? <Spinner /> :
                 <button type="button" onClick={this.saveWorkout} className="save-workout-btn" disabled={(this.getStateExercises && this.getStateExercises().length === 0) || this.state.workoutName.length === 0} >Save</button>
               }
